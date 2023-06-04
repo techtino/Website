@@ -1,5 +1,6 @@
 ---
 title: "Immutable distros & Improving the flatpak experience"
+date: "2023-06-04"
 weight: 1
 type: docs
 summary: "Tool to set short-name symlinks for flatpak's."
