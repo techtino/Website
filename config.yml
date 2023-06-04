@@ -63,6 +63,8 @@ params:
           url: "https://github.com/techtino"
         - name: linkedin
           url: "https://www.linkedin.com/in/valentino-aguiar-1a37581b3"
+    enableGitInfo: true
+    showLastUpdated: true
 taxonomies:
     category: categories
     tag: tags
