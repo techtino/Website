@@ -1,0 +1,69 @@
+baseURL: "https://techtino.co.uk/"
+title: TechTino
+paginate: 5
+theme: PaperMod
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+# googleAnalytics: UA-123-45
+
+minify:
+    disableXML: true
+    # minifyOutput: true
+
+languages:
+    en:
+        languageName: "English"
+        weight: 1
+        menu:
+                main:
+                  - name: Home
+                    url: /
+                    weight: 4
+                  - name: Blog 
+                    url: blog
+                    weight: 5
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON
+
+params:
+    env: production # to enable google analytics, opengraph, twitter-cards and schema.
+    author: Valentino Aguiar
+    defaultTheme: auto
+    # disableThemeToggle: true
+    ShowShareButtons: true
+    ShowReadingTime: true
+    # disableSpecial1stPost: true
+    displayFullLangName: true
+    ShowPostNavLinks: true
+    ShowBreadCrumbs: true
+    # comments: false
+    images: ["papermod-cover.png"]
+
+    profileMode:
+        enabled: true 
+        title: Valentino Aguiar
+        subtitle: Infrastructure Engineer 
+        imageUrl: "profile.jpeg"
+        imageTitle: Me
+          #imageWidth: 120
+        # imageHeight: 120
+    homeInfoParams:
+        Title: Hi there wave
+        Content: Can be Info, links, about...
+    socialIcons:
+        - name: github
+          url: "https://github.com/techtino"
+        - name: linkedin
+          url: "https://www.linkedin.com/in/valentino-aguiar-1a37581b3"
+taxonomies:
+    category: categories
+    tag: tags
+    series: series
