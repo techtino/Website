@@ -1,6 +1,6 @@
 ---
 title: "Droidian Guide"
-date: 2022-05-06T11:30:03+00:00
+date: "2022-05-06"
 weight: 1
 type: docs
 summary: "Setting up the droidian mobile linux distribution."
