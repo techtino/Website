@@ -1,6 +1,6 @@
 ---
 title: "Website Hosting with Cloudflare Pages"
-date: 2023-06-04T17:30:00+00:00
+date: "2023-06-04"
 weight: 1
 type: docs
 summary: Migrating my website from a locally hosted hugo instance, to cloudflare.
