@@ -44,3 +44,5 @@ https://gohugo.io/hosting-and-deployment/hosting-on-github/
 
 # End result
 The website you are on right now is hosted by cloudflare, and is much more reliable and easy to manage! In-fact this blog post was written in the native github editor.
+
+You can see the git repo for this very site here: https://github.com/techtino/Website
