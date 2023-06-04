@@ -1,6 +1,7 @@
 ---
 title: "Learning how to write a gnome extension"
 weight: 1
+date: "2023-04-06"
 type: docs
 summary: "One click hotspot connection in Gnome."
 ---
