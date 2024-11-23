@@ -23,7 +23,7 @@ Personally, I think it's a very interesting and different approach to the Linux 
 
 Most interesting to me is Fedora Silverblue. This makes for a clean base OS image, which is guaranteed to be more or less identical to any other system, and encourages app installs in containers. This provides many advantages, but a few obvious ones to note:
 
-1. When troubleshooting is required, distro maintainers know exactly what to expect under the hood, so it reduces the likeliness of external packages affecting the system in unattended ways.
+1. When troubleshooting is required, distro maintainers know exactly what to expect under the hood, so it reduces the likeliness of external packages affecting the system in unintended ways.
 2. Upgrading your Linux distro is a smooth and painless experience, as you end up with an image that has been tested by thousands of people, so you know it will work.
 3. Security. 90% of what a user wants to install, can be done without root permissions on their system. Containerised applications are the standard here, meaning that harmful software has little chance of infecting a user's system. There are packages such as drivers that will need to be layered on-top, but these are the minority.
 4. Encourages keeping development tools in a dedicated sandbox, where they can't pile up on your base OS. You can just nuke a container once you are done with it. This is encouraged by tools such as 'toolbox' and 'distrobox'.
