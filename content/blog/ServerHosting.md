@@ -25,19 +25,19 @@ I personally back up my container volumes and docker-compose to my NAS. I have a
 
 Here's a very basic example service in my docker-compose yaml.
 ```
-    whoami:
-        image: traefik/whoami
-        command:
-        # It tells whoami to start listening on 2001 instead of 80
-        - --port=2001
-        - --name=iamfoo
-        labels:
-            - "traefik.enable=true"
-            - "traefik.http.services.whoami.loadbalancer.server.port=2001"
-            - "traefik.http.routers.whoami.rule=Host(`whoami.techtino.co.uk`)"
-            - "traefik.http.routers.whoami.entrypoints=websecure"
-            - "traefik.http.routers.whoami.tls.certresolver=myresolver"
-            - "traefik.http.routers.whoami.middlewares=traefik-forward-auth"
+whoami:
+	image: traefik/whoami
+	command:
+	# It tells whoami to start listening on 2001 instead of 80
+	- --port=2001
+	- --name=iamfoo
+	labels:
+		- "traefik.enable=true"
+		- "traefik.http.services.whoami.loadbalancer.server.port=2001"
+		- "traefik.http.routers.whoami.rule=Host(`whoami.techtino.co.uk`)"
+		- "traefik.http.routers.whoami.entrypoints=websecure"
+		- "traefik.http.routers.whoami.tls.certresolver=myresolver"
+		- "traefik.http.routers.whoami.middlewares=traefik-forward-auth"
 ```
 All docker does is pull down the whoami image from dockerhub and run it with a few parameters (port and name). You'll notice lots of labels! I'll go over what these do later.
 ### Traefik
@@ -46,39 +46,39 @@ Traefik is a reverse proxy which is tailored towards containerised workloads. Tr
 Here's what my traefik configuration looks like in docker-compose:
 ```
 traefik:
-        image: "traefik:latest"
-        container_name: "traefik"
-        command:
-            #- "--log.level=DEBUG"
-            - "--api.insecure=true"
-            - "--providers.docker=true"
-            - "--providers.docker.exposedbydefault=false"
-            - "--entrypoints.websecure.address=:443"
-            - "--certificatesresolvers.myresolver.acme.dnschallenge=true"
-            - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare"
-            - "--certificatesresolvers.myresolver.acme.email=xxxx"
-            - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-            - "--serversTransport.insecureSkipVerify=true"
-            - "--metrics.prometheus=true"
-        ports:
-            - "443:443"
-            - "8081:8080"
-        volumes:
-            - "./letsencrypt:/letsencrypt"
-            - "/var/run/docker.sock:/var/run/docker.sock"
-        environment:
-            - "CF_API_EMAIL=xxxx"
-            - "CF_DNS_API_TOKEN=******"
-        restart: always
-        depends_on:
-            - sonarr
-            - radarr
-            - jellyfin
-            - portainer
-            - nextcloud
-            - collabora
-        extra_hosts:
-            - "host.docker.internal:172.17.0.1"
+	image: "traefik:latest"
+	container_name: "traefik"
+	command:
+		#- "--log.level=DEBUG"
+		- "--api.insecure=true"
+		- "--providers.docker=true"
+		- "--providers.docker.exposedbydefault=false"
+		- "--entrypoints.websecure.address=:443"
+		- "--certificatesresolvers.myresolver.acme.dnschallenge=true"
+		- "--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare"
+		- "--certificatesresolvers.myresolver.acme.email=xxxx"
+		- "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+		- "--serversTransport.insecureSkipVerify=true"
+		- "--metrics.prometheus=true"
+	ports:
+		- "443:443"
+		- "8081:8080"
+	volumes:
+		- "./letsencrypt:/letsencrypt"
+		- "/var/run/docker.sock:/var/run/docker.sock"
+	environment:
+		- "CF_API_EMAIL=xxxx"
+		- "CF_DNS_API_TOKEN=******"
+	restart: always
+	depends_on:
+		- sonarr
+		- radarr
+		- jellyfin
+		- portainer
+		- nextcloud
+		- collabora
+	extra_hosts:
+		- "host.docker.internal:172.17.0.1"
 ```
 
 I'm aware this is a fairly verbose example! Lets break it down.
@@ -95,22 +95,22 @@ We additionally expose the host's docker socket so that traefik is able to commu
 Traefik can be tied into an auth middleware to harden access towards services which only have basic/no auth. I personally use https://github.com/thomseddon/traefik-forward-auth backed with google oauth.
 ```
 traefik-forward-auth:
-        image: thomseddon/traefik-forward-auth:2
-        container_name: traefik-forward-auth
-        environment:
-            - PROVIDERS_GOOGLE_CLIENT_ID=xxxx
-            - PROVIDERS_GOOGLE_CLIENT_SECRET=xxxx
-            - SECRET=xxxx
-            - LOG_LEVEL=debug
-            - WHITELIST=xxxx
-        labels:
-            - "traefik.enable=true"
-            - "traefik.http.middlewares.traefik-forward-auth.forwardauth.address=http://traefik-forward-auth:4181"
-            - "traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders=X-Forwarded-User"
-            - "traefik.http.services.traefik-forward-auth.loadbalancer.server.port=4181"
-        depends_on:
-            - traefik
-        restart: always
+	image: thomseddon/traefik-forward-auth:2
+	container_name: traefik-forward-auth
+	environment:
+		- PROVIDERS_GOOGLE_CLIENT_ID=xxxx
+		- PROVIDERS_GOOGLE_CLIENT_SECRET=xxxx
+		- SECRET=xxxx
+		- LOG_LEVEL=debug
+		- WHITELIST=xxxx
+	labels:
+		- "traefik.enable=true"
+		- "traefik.http.middlewares.traefik-forward-auth.forwardauth.address=http://traefik-forward-auth:4181"
+		- "traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders=X-Forwarded-User"
+		- "traefik.http.services.traefik-forward-auth.loadbalancer.server.port=4181"
+	depends_on:
+		- traefik
+	restart: always
 ```
 Again, read their docs for more clarity, but lets break it down.
 #### Environment
@@ -122,13 +122,13 @@ Traefik knows how to pick up labels from docker and use those to generate revers
 
 Snippet from the 'whoami' example:
 ```
-	labels:
-		- "traefik.enable=true"
-		- "traefik.http.services.whoami.loadbalancer.server.port=2001"
-		- "traefik.http.routers.whoami.rule=Host(`whoami.techtino.co.uk`)"
-		- "traefik.http.routers.whoami.entrypoints=websecure"
-		- "traefik.http.routers.whoami.tls.certresolver=myresolver"
-		- "traefik.http.routers.whoami.middlewares=traefik-forward-auth"
+labels:
+	- "traefik.enable=true"
+	- "traefik.http.services.whoami.loadbalancer.server.port=2001"
+	- "traefik.http.routers.whoami.rule=Host(`whoami.techtino.co.uk`)"
+	- "traefik.http.routers.whoami.entrypoints=websecure"
+	- "traefik.http.routers.whoami.tls.certresolver=myresolver"
+	- "traefik.http.routers.whoami.middlewares=traefik-forward-auth"
 ```
 The labels in my above whoami example are very simple. It tells traefik to create a new service 'whoami' (traefik.http.services.whoami) and a new router (traefik.http.routers.whoami). Traefik is informed that the service should expose port 2001 from inside the container. The router configuration tells traefik to direct clients to the service by the same name (whoami) if the client is specifying a request url or a host header of 'whoami.techtino.co.uk'. We then tell traefik to use the 'websecure' entrypoint, which is port 443. We also configure a TLS Cert resolver and middleware for authentication.
 ### Exposing to the internet
