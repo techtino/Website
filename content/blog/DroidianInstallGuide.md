@@ -69,30 +69,7 @@ First we need to download a few things. TWRP 3.3.1, the droidian zips and our bo
 
 [For OnePlus 6T](https://eu.dl.twrp.me/fajita/twrp-3.3.1-1-fajita.img.html)
 
-### Droidian Zips
-[Download the latest stable droidian zips from here](https://github.com/droidian-images/rootfs-api28gsi-all/releases/tag/droidian%2Fbullseye%2F22)
+### Follow Droidian upstream docs!
 
-Specifically we want the arm64 rootfs and optionally the devtools if we wish to have additional features such as SSHing from a PC.
-
-Optionally, if you are feeling brave, then you can use the latest nightlies [here](https://github.com/droidian-images/rootfs-api28gsi-all/releases/tag/nightly) instead but there are chances for random issues.
-
-### Boot image for OnePlus 6 and 6T
-[Get it Here](https://github.com/techtino/Droidian-Install-Guide-OP6-6T-/raw/main/halium-boot.img)
-Boot image built by: https://github.com/MrCyjaneK (He's put a bunch of work into the kernel)
-
-# Installing Droidian
-Load the phone into fastboot mode, then run:
-
-    sudo fastboot flash boot halium-boot.img
-    sudo fastboot boot twrp-3.3.1-2-[device].img
-Go to Advanced, then click Sideload and run:
-
-    sudo adb sideload droidian-rootfs-api28gsi-arm64_[date].zip
-    sudo adb sideload droidian-devtools-arm64_[date].zip
-
-All Done, press reboot, then system in TWRP and you'll be greeted with Phosh!
-BTW, default password is 1234, probably want to change that :D
-
-# Droidian Tips and tricks
-[Take a look here](https://pad.mrcyjanek.net/p/r.901550d73e46cfeced7e4f12e969d120)
-It'll probably cover most of the things you need :D
+We used to have to manually flash images, but Droidian now have a native installer which does the job for us.
+https://devices.droidian.org/#/devices/enchilada
