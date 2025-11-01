@@ -3,6 +3,7 @@ title: Self Hosting solution
 weight: 1
 type: docs
 summary: How my homelab works (docker, traefik, cloudflare tunnel)
+date: 2025-11-01
 ---
 ## Intro
 Running a homelab can teach you a lot about networking, systems administration, devops and so on. This post is intended to give you a vague idea on what your homelab might look like if you choose to go down that path.
