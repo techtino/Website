@@ -134,7 +134,7 @@ The labels in my above whoami example are very simple. It tells traefik to creat
 ### Exposing to the internet
 A selection of services are exposed to the internet. Cloudflare tunnel (https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/) is used to manage this. This tunnels traffic via Cloudflare's servers as opposed to opening ports locally and exposing it via your firewall/router. This has some security benefits (guaranteed masked IP address). It also gets around a pesky limitation of Carrier Grade NAT not allowing opening ports. One thing to note is that CloudFlare's TOS does not permit you to stream media over the tunnel. The tunnel is used to stream web elements only, and for cases of media streaming, I resort to tailscale.
 
-As briefly touched on, Cloudflare is being used to provide DNS management. The tunnel is simply configured as a wildcard `*.techtino.co.uk` CNAME which redirects to the my cloudflare tunnel dns record. Cloudflare docs on how to configure it can be found here: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/routing-to-tunnel/dns/.
+As briefly touched on, Cloudflare is being used to provide DNS management. The tunnel is simply configured as a wildcard `*.techtino.co.uk` CNAME which redirects to my cloudflare tunnel dns record. Cloudflare docs on how to configure it can be found here: https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/routing-to-tunnel/dns/.
 
 Backing everything with cloudflares dns and cdn management capabilities also ensures web assets are quick to load from anywhere, and you get all of the regular protections Cloudflare provides.
 ## Tailscale setup
